@@ -4,8 +4,7 @@ const router = require("express").Router();
 router.get("/", async (req, res) => {
   // Get all blog articles
 
-  res.send("<h1>Homepage<h1>");
-  // res.render("home");
+  res.render("homepage");
 });
 
 // Dashboard
