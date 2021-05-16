@@ -1,0 +1,4 @@
+/* Header */
+header nav .nav-item:is(:last-child) {
+  margin-right: 0;
+}
