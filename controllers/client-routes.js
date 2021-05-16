@@ -3,18 +3,15 @@ const { User, Post } = require("../models");
 
 // Homepage
 router.get("/", async (req, res) => {
-  // Get all blog articles
   try {
     const postData = await Post.findAll({
       include: [{ model: User, attributes: ["name"] }],
     });
+    const posts = postData.map((post) => post.get({ plain: true }));
 
-    const posts = postData.map(({ dataValues }) => dataValues);
-
-    res.json(posts);
-    // res.render("homepage",{posts});
+    res.render("homepage", { posts });
   } catch (error) {
-    res.status(500).json();
+    res.status(500).json(error);
   }
 });
 
