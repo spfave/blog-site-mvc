@@ -29,12 +29,15 @@ router.get("/", async (req, res) => {
 // Edit article
 
 // Login
-// router.get("/login", (req, res) => {
-//   // check logged in - redirect to dashboard
+router.get("/login", (req, res) => {
+  // check logged in - redirect to dashboard
 
-//   res.render("login");
-// });
+  res.render("login");
+});
 
 // Sign up
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
 
 module.exports = router;
