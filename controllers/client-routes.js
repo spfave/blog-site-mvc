@@ -1,10 +1,19 @@
 const router = require("express").Router();
+const { Post } = require("../models");
 
 // Homepage
 router.get("/", async (req, res) => {
   // Get all blog articles
+  try {
+    const postData = await Post.findAll();
 
-  res.render("homepage");
+    const posts = postData.map(({ dataValues }) => dataValues);
+
+    res.json(posts);
+    // res.render("homepage",{posts});
+  } catch (error) {
+    res.status(500).json();
+  }
 });
 
 // Dashboard
