@@ -1,11 +1,13 @@
 const router = require("express").Router();
-const { Post } = require("../models");
+const { User, Post } = require("../models");
 
 // Homepage
 router.get("/", async (req, res) => {
   // Get all blog articles
   try {
-    const postData = await Post.findAll();
+    const postData = await Post.findAll({
+      include: [{ model: User, attributes: ["name"] }],
+    });
 
     const posts = postData.map(({ dataValues }) => dataValues);
 
