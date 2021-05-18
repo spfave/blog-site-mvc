@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, Post } = require("../models");
+const checkAuth = require("../utils/auth");
 
 // Homepage
 router.get("/", async (req, res) => {
@@ -16,11 +17,20 @@ router.get("/", async (req, res) => {
 });
 
 // Dashboard
-// router.get("/dashboard", async (req,res) => {
-//   // check logged in - redirect to login
+router.get("/dashboard", checkAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Post }],
+    });
+    const user = userData.get({ plain: true });
 
-//   res.render("dashboard");
-// });
+    res.json(user);
+    // res.render("dashboard", { ...user, logged_in: true });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 // Get single article with comments
 
