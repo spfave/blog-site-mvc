@@ -1,11 +1,11 @@
-const handleFormSignup = async (event) => {
+const handleFormLogin = async (event) => {
   event.preventDefault();
 
   const username = document.querySelector("#username").value.trim();
   const password = document.querySelector("#password").value.trim();
 
   if (username && password) {
-    const response = await fetch("/api/users/signup", {
+    const response = await fetch("/api/users/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },
@@ -14,12 +14,11 @@ const handleFormSignup = async (event) => {
     if (response.ok) {
       document.location.replace("/"); //dashboard
     } else {
-      // const test = await response.json();
       alert(response.statusText);
     }
   }
 };
 
 document
-  .querySelector("#form-signup")
-  .addEventListener("click", handleFormSignup);
+  .querySelector("#form-login")
+  .addEventListener("click", handleFormLogin);
