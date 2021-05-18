@@ -3,6 +3,10 @@ header nav .nav-item:is(:last-child) {
   margin-right: 0;
 }
 
+header #btn-logout:hover {
+  cursor: pointer;
+}
+
 /* Post Card */
 .card .card-header :is(h3, p) {
   margin-bottom: 0;
