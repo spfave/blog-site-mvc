@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     });
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render("homepage", { posts });
+    res.render("homepage", { posts, logged_in: req.session.logged_in });
   } catch (error) {
     res.status(500).json(error);
   }
@@ -30,7 +30,10 @@ router.get("/", async (req, res) => {
 
 // Login
 router.get("/login", (req, res) => {
-  // check logged in - redirect to dashboard
+  if (req.session.logged_in) {
+    res.redirect("/");
+    return;
+  }
 
   res.render("login");
 });
