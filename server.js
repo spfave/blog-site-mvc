@@ -1,19 +1,21 @@
-const path = require("path");
+require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
-const exphbs = require("express-handlebars");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const path = require("path");
 
 const sequelize = require("./config/connection");
-const routes = require("./controllers");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const helpers = require("./utils/hb-helpers");
 
-const PORT = process.env.PORT || 3001;
+const exphbs = require("express-handlebars");
+const routes = require("./controllers");
+
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 const sess = {
-  secret: "secret",
-  cookie: { maxAge: 10 * 60 * 1000 },
+  secret: process.env.SESS_SECRET,
+  cookie: { maxAge: 60 * 60 * 1000 },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({ db: sequelize }),
