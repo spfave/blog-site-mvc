@@ -17,7 +17,22 @@ router.post("/", checkAuth, async (req, res) => {
 });
 
 // Update post
-router.put("/:id", checkAuth, async (req, res) => {});
+router.put("/:id", checkAuth, async (req, res) => {
+  try {
+    const postData = await Post.update(req.body, {
+      where: { id: req.params.id }, //, user_id: req.session.user_id
+    });
+
+    if (!postData[0]) {
+      res.status(404).json({ message: `Post does not exist to update` });
+      return;
+    }
+
+    res.status(200).json(postData);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
 
 // Delete post
 router.delete("/:id", checkAuth, async (req, res) => {});
