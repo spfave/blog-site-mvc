@@ -1,3 +1,9 @@
+/* Resets */
+:is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+
+/* Main View */
 /* Header */
 header nav .nav-item:is(:last-child) {
   margin-right: 0;
@@ -7,7 +13,18 @@ header #btn-logout:hover {
   cursor: pointer;
 }
 
-/* Post Card */
+/* Homepage View */
+/* Post card */
 .card .card-header :is(h3, p) {
   margin-bottom: 0;
+}
+
+/* Dashboard View */
+.dashboard-post {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+}
+
+.dashboard-post :is(p, small) {
+  margin: 0;
 }
