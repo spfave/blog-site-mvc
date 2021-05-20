@@ -25,8 +25,7 @@ router.get("/dashboard", checkAuth, async (req, res) => {
     });
     const user = userData.get({ plain: true });
 
-    res.json(user);
-    // res.render("dashboard", { ...user, logged_in: true });
+    res.render("dashboard", { ...user, logged_in: true });
   } catch (error) {
     res.status(500).json(error);
   }
