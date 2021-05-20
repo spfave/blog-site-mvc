@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Main View */
 /* Header */
 header nav .nav-item:is(:last-child) {

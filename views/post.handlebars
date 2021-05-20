@@ -1,0 +1,13 @@
+<section>
+  {{> post-details}}
+</section>
+
+<section>
+  {{#if comments.length}}
+  <h4 class="mb-2">Comments</h4>
+
+  {{#each comments as |comment|}}
+  {{> comment-details}}
+  {{/each}}
+  {{/if}}
+</section>
