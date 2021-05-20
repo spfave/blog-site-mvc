@@ -58,7 +58,11 @@ router.get("/dashboard/new-post", checkAuth, async (req, res) => {
 // Edit post
 router.get("/dashboard/edit-post/:id", checkAuth, async (req, res) => {
   try {
-    res.send("edit-post");
+    const postDate = await Post.findByPk(req.params.id);
+    const post = postDate.get({ plain: true });
+
+    // res.render("post-manage", {...post, new: false, logged_in: req.session.logged_in})
+    res.json({ ...post, new: false, logged_in: req.session.logged_in });
   } catch (error) {
     res.status(500).json(error);
   }
