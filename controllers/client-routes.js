@@ -31,11 +31,32 @@ router.get("/dashboard", checkAuth, async (req, res) => {
   }
 });
 
-// Get single article with comments
+// Get single post with comments
+router.get("/post/:id", async (req, res) => {
+  try {
+    res.send("post");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
-// Create article
+// New post
+router.get("/dashboard/new-post", checkAuth, async (req, res) => {
+  try {
+    res.send("new-post");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
-// Edit article
+// Edit post
+router.get("/dashboard/edit-post/:id", checkAuth, async (req, res) => {
+  try {
+    res.send("edit-post");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 // Login
 router.get("/login", (req, res) => {
