@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Post } = require("../models");
+const { User, Post, Comment } = require("../models");
 const checkAuth = require("../utils/auth");
 
 // Homepage
@@ -34,7 +34,13 @@ router.get("/dashboard", checkAuth, async (req, res) => {
 // Get single post with comments
 router.get("/post/:id", async (req, res) => {
   try {
-    res.send("post");
+    const postDate = await Post.findByPk(req.params.id, {
+      include: [{ model: User, attributes: ["username"] }, { model: Comment }],
+    });
+    const post = postDate.get({ plain: true });
+
+    // res.render("post", { ...post, logged_in: req.session.logged_in });
+    res.json(post);
   } catch (error) {
     res.status(500).json(error);
   }
