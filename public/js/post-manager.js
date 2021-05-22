@@ -21,7 +21,15 @@ const editPostHandler = async () => {
   document.location.replace("/dashboard");
 };
 
-const deletePostHandler = async () => {};
+const deletePostHandler = async () => {
+  const response = await fetch(`/api/posts/${getPostID()}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!response.ok) return alert("Failed to delete post");
+
+  document.location.replace("/dashboard");
+};
 
 // Event listeners
 document
