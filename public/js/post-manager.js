@@ -5,6 +5,18 @@ const postBody = document.querySelector("#content");
 // Functions
 const getPostID = () => document.location.toString().split("/").pop();
 
+const getPostData = async () => {
+  const response = await fetch(`/api/posts/${getPostID()}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!response.ok) return alert("Failed to get post");
+
+  const postData = await response.json();
+  postTitle.value = postData.title;
+  postBody.value = postData.body;
+};
+
 const editPostHandler = async () => {
   const title = postTitle.value.trim();
   const body = postBody.value.trim();
@@ -30,6 +42,9 @@ const deletePostHandler = async () => {
 
   document.location.replace("/dashboard");
 };
+
+// Script execution
+getPostData();
 
 // Event listeners
 document
