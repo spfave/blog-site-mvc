@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     res.render("homepage", { posts, logged_in: req.session.logged_in });
-    // res.json({ posts, logged_in: req.session.logged_in });
+    // res.json({ posts, logged_in: req.session.logged_in }); // testing
   } catch (error) {
     res.status(500).json(error);
   }
@@ -56,8 +56,11 @@ router.get("/post/:id", async (req, res) => {
 // New post
 router.get("/dashboard/new-post", checkAuth, async (req, res) => {
   try {
-    // res.render("post-manage", { newPost: true, logged_in: req.session.logged_in });
-    res.json({ newPost: true, logged_in: req.session.logged_in });
+    res.render("post-manage", {
+      newPost: true,
+      logged_in: req.session.logged_in,
+    });
+    // res.json({ newPost: true, logged_in: req.session.logged_in }); // testing
   } catch (error) {
     res.status(500).json(error);
   }
@@ -66,11 +69,14 @@ router.get("/dashboard/new-post", checkAuth, async (req, res) => {
 // Edit post
 router.get("/dashboard/edit-post/:id", checkAuth, async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id);
-    const post = postData.get({ plain: true });
+    // const postData = await Post.findByPk(req.params.id);
+    // const post = postData.get({ plain: true });
 
-    // res.render("post-manage", {...post, newPost: false, logged_in: req.session.logged_in})
-    res.json({ ...post, newPost: false, logged_in: req.session.logged_in });
+    res.render("post-manage", {
+      newPost: false,
+      logged_in: req.session.logged_in,
+    });
+    // res.json({ ...post, newPost: false, logged_in: req.session.logged_in }); // testing
   } catch (error) {
     res.status(500).json(error);
   }
