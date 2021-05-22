@@ -25,10 +25,15 @@ header #btn-logout:hover {
 
 /* Dashboard View */
 .dashboard-post {
+  border: solid 1px #343a40;
   margin-bottom: 1rem;
   padding: 0.75rem;
 }
 
 .dashboard-post :is(p, small) {
   margin: 0;
+}
+
+.dashboard-post:hover {
+  background-color: #eee;
 }
