@@ -8,7 +8,7 @@
   </div>
 
   <div class="card-body">
-    <form action="">
+    <form id="form-post">
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input type="text" class="form-control" id="title">
@@ -20,7 +20,7 @@
 
       <div class="text-center">
         {{#if newPost}}
-        <button type="submit" id="btn-post-submit" class="btn btn-dark">Post</button>
+        <button type="submit" class="btn btn-dark">Post</button>
         {{else}}
         <button id="btn-post-update" class="btn btn-dark">Update</button>
         <button id="btn-post-delete" class="btn btn-danger">Delete</button>
@@ -29,3 +29,9 @@
     </form>
   </div>
 </div>
+
+{{#if newPost}}
+<script src="/js/post-new.js"></script>
+{{else}}
+<script src="/js/post-manager.js"></script>
+{{/if}}
