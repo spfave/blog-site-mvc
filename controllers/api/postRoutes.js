@@ -16,6 +16,18 @@ router.post("/", checkAuth, async (req, res) => {
   }
 });
 
+// Get post
+router.get("/:id", checkAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+    const post = postData.get({ plain: true });
+
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
 // Update post
 router.put("/:id", checkAuth, async (req, res) => {
   try {
